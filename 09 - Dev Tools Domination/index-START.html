@@ -19,28 +19,60 @@
     }
 
     // Regular
+    console.log("hello");
 
     // Interpolated
+    console.log("Hello I am a %s string!", "+poo")
 
     // Styled
+    // console.log("%c I am some great text", 'font-size:20px; background:red')
 
     // warning!
+    console.warn("OH NOO!")
 
     // Error :|
+    console.error("OH BAD!")
 
     // Info
+    console.info("Fun fact. Crocs eat 3-4 people per year.")
 
     // Testing
+    console.assert(1 === 2, "That is wrong")
 
     // clearing
+    console.clear()
 
     // Viewing DOM Elements
+    const p = document.querySelector('p')
+    console.dir(p)
 
     // Grouping together
-
+    console.clear()
+    
+    dogs.forEach(dog => {
+      console.groupCollapsed(`${dog.name}`);
+      console.log(`This is ${dog.name}`);
+      console.log(`This is how old ${dog.age}`);
+      console.log(`This is how old ${dog.age}`);
+      console.log(`This is how old ${dog.age}`);
+      console.groupEnd(`${dog.name}`);
+    })
+    
     // counting
+    console.count('b')
+    console.count('b')
+    console.count('b')
+    console.count('b')
+    console.count('b')
 
     // timing
+    console.time('fetching data');
+    fetch('https://api.github.com/users/blakewesley')
+      .then(data => data.json())
+      .then(data => {
+        console.timeEnd('fetching data');
+        console.log(data);
+      })
 
   </script>
 </body>

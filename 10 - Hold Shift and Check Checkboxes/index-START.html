@@ -97,6 +97,48 @@
   </div>
 
 <script>
+  // Need to only do it when holding shift
+  let shiftHeld = false;
+
+  document.addEventListener("keydown", (e) => {
+    if (e.keyCode !== 16) return;
+    shiftHeld = true;
+    console.log(shiftHeld);
+  });
+
+  document.addEventListener("keyup", (e) => {
+    if (e.keyCode !== 16) return;
+    shiftHeld = false;
+    console.log(shiftHeld);
+  })
+
+  // Get the list of all checkboxes
+  const checkboxes = document.querySelectorAll("input");
+
+  // Listen for the value of checked to change on each checkbox
+  checkboxes.forEach(checkbox => checkbox.addEventListener("input", handleCheck));
+
+  let lastChecked;
+
+  function handleCheck(e) {
+    let inBetween = false;
+    if (shiftHeld && this.checked){
+      checkboxes.forEach(checkbox => {
+        if (checkbox === this || checkbox === lastChecked){
+          inBetween = !inBetween;
+        }
+        if (inBetween) {
+          checkbox.checked = true;
+        }
+      })
+    }
+
+    lastChecked = this;
+  }
+
+
+  // Change the value for checked to true for all checkboxes between the last clicked and the current clicked.
+
 </script>
 </body>
 </html>
