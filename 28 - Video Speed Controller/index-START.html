@@ -9,13 +9,32 @@
 <body>
 
   <div class="wrapper">
-    <video class="flex" width="765" height="430" src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4" loop controls></video>
+    <video class="flex" width="765" height="430" src="./9.5 B-roll Video2.mp4" loop controls></video>
     <div class="speed">
       <div class="speed-bar">1×</div>
     </div>
   </div>
 
 <script>
+  const video = document.querySelector(".flex");
+  const speed = document.querySelector(".speed");
+  const bar = document.querySelector(".speed-bar");
+
+  function handleMove(e) {
+    const y = e.pageY - this.offsetTop;
+    const percent = y / this.offsetHeight;
+    const min = 0.5;
+    const max = 4;
+    const height = Math.round(percent * 100) + '%';
+    bar.style.height = height;
+    const playbackRate = percent * (max - min) + min;
+    bar.innerText = playbackRate.toFixed(2) + 'x';
+    video.playbackRate = playbackRate;
+  }
+
+  speed.addEventListener("mousemove", handleMove);
+
+  // Change the speeds CSS height property to get max and min value between 0.5 and 4.
 </script>
 </body>
 </html>

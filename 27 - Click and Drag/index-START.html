@@ -36,6 +36,37 @@
   </div>
 
 <script>
+  const slider = document.querySelector(".items");
+  let isMouseDown = false; // flag for tracking if mouse is held down
+  let startX; // starting x position
+  let scrollLeft; // how far we are scrolled to the left
+
+  slider.addEventListener("mousedown", (e) => {
+    isMouseDown = true;
+    // get the starting position.
+    slider.classList.add("active");
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+  });
+
+  slider.addEventListener("mouseleave", () => {
+    isMouseDown = false;
+    slider.classList.remove("active");
+  });
+  
+  slider.addEventListener("mouseup", () => {
+    isMouseDown = false;
+    slider.classList.remove("active");
+  });
+
+  slider.addEventListener("mousemove", (e) => {
+    if (!isMouseDown) return;
+    e.preventDefault(); // so we don't get default browser things happening while clicking and dragging.
+    const x = e.pageX - slider.offsetLeft; // current position
+    const walk = x - startX; // difference between current position and starting position
+    slider.scrollLeft = scrollLeft - walk;
+  });
+
 </script>
 
   </body>
